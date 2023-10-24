@@ -1,1 +1,27 @@
-<h1><?php echo CONFIG_SITE_TITLE ?></h1>
+<h1>Home</h1>
+<div id="homeCarousel" class="carousel slide" data-bs-touch="true">
+  <div class="carousel-indicators">
+    <?php foreach($pictures as $key => $pic): ?>
+    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="<?= $key ?>" <?php if ($key===array_key_first($pictures)) echo 'class="active" aria-current="true"'; ?> aria-label="Slide <?= $key+1 ?>"></button>
+    <?php endforeach ?>
+  </div>
+  <div class="carousel-inner">
+  <?php foreach($pictures as $key => $pic): ?>
+    <div class="carousel-item <?php if ($key===array_key_first($pictures)) echo 'active' ?>">
+      <img src="<?= $pic['src'] ?>" class="d-block w-100" alt="<?= $pic['title'] ?>">
+      <div class="carousel-caption d-none d-md-block">
+        <h5><?= $pic['title'] ?></h5>
+        <p><?= $pic['description'] ?></p>
+      </div>
+    </div>
+    <?php endforeach ?>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
