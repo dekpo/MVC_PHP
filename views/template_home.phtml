@@ -1,4 +1,4 @@
-<h1>Home</h1>
+<h1 class="text-center">Home</h1>
 <div id="homeCarousel" class="carousel slide" data-bs-touch="true">
   <div class="carousel-indicators">
     <?php foreach($pictures as $key => $pic): ?>
@@ -6,6 +6,7 @@
     <?php endforeach ?>
   </div>
   <div class="carousel-inner">
+
   <?php foreach($pictures as $key => $pic): ?>
     <div class="carousel-item <?php if ($key===array_key_first($pictures)) echo 'active' ?>">
       <img src="<?= $pic['src'] ?>" class="d-block w-100" alt="<?= $pic['title'] ?>">
@@ -14,6 +15,7 @@
         <p><?= $pic['description'] ?></p>
       </div>
     </div>
+    
     <?php endforeach ?>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
