@@ -1,6 +1,6 @@
 <?php
 $db = connectDB();
-$sql = $db->prepare("SELECT * FROM my_table");
+$sql = $db->prepare("SELECT * FROM picture");
 $sql->execute();
 $results = $sql->fetchAll(PDO::FETCH_ASSOC);
 

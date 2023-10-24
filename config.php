@@ -6,7 +6,7 @@ define("CONFIG_ROUTES",[
     "contact" => "contact"
 ]);
 const DB_HOST = "localhost";
-const DB_NAME = "my_db_name";
+const DB_NAME = "my_mvc_bdd";
 const DB_USER = "root";
 const DB_PASS = "";
 function connectDB(): PDO{
