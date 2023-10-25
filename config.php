@@ -1,9 +1,11 @@
 <?php
-define("CONFIG_SITE_TITLE","Mon modèle MVC PHP");
+define("CONFIG_SITE_TITLE","The MVC Design Pattern - PHP");
 define("CONFIG_ROUTES",[
-    "home" => "home",
-    "gallery" => "gallery",
-    "contact" => "contact"
+    "home" => "Home",
+    "gallery" => "Gallery",
+    "contact" => "Contact",
+    "api" => "API JSON",
+    "adminlist" => "Admin List"
 ]);
 const DB_HOST = "localhost";
 const DB_NAME = "my_mvc_bdd";

@@ -38,7 +38,7 @@
                     <?php foreach (CONFIG_ROUTES as $key => $value) : ?>
                         <li class="nav-item">
                             <a class="nav-link <?php if ($page === $key) echo "active"; ?>" href="?page=<?= $key ?>">
-                                <?= ucfirst($key) ?>
+                                <?= $value ?>
                             </a>
                         </li>
                     <?php endforeach ?>
