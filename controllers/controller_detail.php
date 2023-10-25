@@ -5,6 +5,7 @@ $db = connectDB();
 $id = intval( $_GET['id'] );
 $sql = $db->prepare("SELECT * FROM picture WHERE id='".$id."'");
 $sql->execute();
+// LE FETCH TOUT COURT NE RETOURNE QU'UN SEUL ARRAY PLAT
 $pic = $sql->fetch(PDO::FETCH_ASSOC);
 // --- on charge la vue
 include "./views/layout.phtml";
