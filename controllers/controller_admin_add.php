@@ -10,7 +10,7 @@ if (isset($_POST['submit'])){
         $_POST['author']
     ]);
     // Et on redirige sur l'adminlist
-    header("Location:?page=adminlist");
+    header("Location:?page=admin_list");
 }
 
 // --- la vue

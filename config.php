@@ -5,7 +5,7 @@ define("CONFIG_ROUTES",[
     "gallery" => "Gallery",
     "contact" => "Contact",
     "api" => "API JSON",
-    "adminlist" => "Admin List"
+    "admin_list" => "Admin List"
 ]);
 const DB_HOST = "localhost";
 const DB_NAME = "my_mvc_bdd";
