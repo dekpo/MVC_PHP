@@ -1,7 +1,7 @@
 <?php
-// --- la config
+// Import de la config
 require "./config.php";
-// --- le routeur
+// Import du routeur
 require "./services/router.php";
-// --- le controlleur
+// Import du controlleur
 require "./controllers/controller_{$page}.php";
