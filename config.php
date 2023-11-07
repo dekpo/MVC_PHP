@@ -3,9 +3,9 @@ define("CONFIG_SITE_TITLE","The MVC PHP");
 define("CONFIG_ROUTES",[
     "home" => "Home",
     "gallery" => "Gallery",
-    "contact" => "Contact",
+    "register" => "Registration",
     "api" => "API JSON",
-    "admin_list" => "Admin List"
+    "admin_list" => "Admin Pic"
 ]);
 const DB_HOST = "localhost";
 const DB_NAME = "my_mvc_bdd";
