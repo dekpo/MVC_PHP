@@ -1,7 +1,6 @@
 <?php
-$db = connectDB();
-$sql = $db->prepare("SELECT * FROM picture ORDER BY id DESC");
-$sql->execute();
-$pictures = $sql->fetchAll(PDO::FETCH_ASSOC);
+require_once("./models/Picture.php");
+
+$pictures = Picture::getAll();
 header('content-type:application/json');
 echo json_encode($pictures);
