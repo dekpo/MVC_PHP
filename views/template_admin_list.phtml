@@ -21,8 +21,7 @@
       <td><?= $pic['author'] ?></td>
       <td>
         <a href="?page=admin_update&id=<?= $pic['id'] ?>" class="btn btn-success m-1">Update</a>
-        <a href="?page=admin_delete&id=<?= $pic['id'] ?>" class="btn btn-danger m-1">Delete</a>
-        <a href="javascript:deletePicture(<?= $pic['id'] ?>)" class="btn btn-warning m-1">Delete? (confirmJS)</a>
+        <a href="javascript:deletePicture(<?= $pic['id'] ?>)" class="btn btn-warning m-1">Delete</a>
       </td>
     </tr>
   <?php endforeach ?>

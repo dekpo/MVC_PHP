@@ -1,4 +1,6 @@
 <?php
+// Si $_SESSION['user'] n'est pas défini on redirige sur le login
+if (!isset($_SESSION['user'])) header("Location:?page=login");
 $db = connectDB();
 // on récupère l'id depuis l'url
 // on la convertit en entier pour être plus prudent...

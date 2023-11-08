@@ -1,4 +1,6 @@
 <?php
+// Si $_SESSION['user'] n'est pas défini on redirige sur le login
+if (!isset($_SESSION['user'])) header("Location:?page=login");
 // Si l'id est dans l'url on delete dans la table
 if (isset($_GET['id'])){
     $id = intval( $_GET['id'] );
