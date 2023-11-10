@@ -1,24 +1,37 @@
 <?php
-$error = "";
+$errors = [];
+
+$upload_max_filesize =  ini_get('upload_max_filesize');
+
 if (isset($_POST['upload'])){
-    // On copie le fichier temporaire vers le dossier uploads
-    // notre projet...
+    
     $tempFile = $_FILES["image_file"]["tmp_name"];
-    // On peut récupérer des infos sur le fichier temporaire
-    // avec getimagesize()
-    $checkFile = getimagesize($tempFile);
-    // Si ce n'est pas une image $checkFile retourne false !
-    if ($checkFile){
-        // $checkFile['mime'] retourne "image/jpeg" par exemple
-        // Donc on fait un array $tabFileName avec explode sur le slash /
-        $tabFileName = explode("/",$checkFile['mime']);
-        // Du coup l'estension de fichier c'est la clé 1 du tableau
-        $ext = $tabFileName[1];
-        // On précise le nom du fichier basé sur un timestamp
-        $newFile = "./uploads/". time() .".".$ext;
-        move_uploaded_file($tempFile,$newFile);
-    } else {
-        $error = "Nous n'acceptons que les images merci !";
+    $fileType = $_FILES["image_file"]["type"];
+    $fileSize = $_FILES["image_file"]["size"];
+    $acceptedType = ["png","jpeg"];
+    $tabFileName = !empty($fileType) ? explode("/",$fileType) : [1=>""];
+    $fileExt = $tabFileName[1];
+
+    if ($fileSize > $upload_max_filesize) {
+        $errors[] ="Le fichier est trop gros !";
+    }
+    
+    if (empty($fileSize)) {
+        $errors[] ="Fichier non traité. Vérifiez éventuellement qu'il ne soit pas trop gros...";
+    }
+    
+    if (!in_array($fileExt,$acceptedType)){
+        $errors[] ="Le fichier doit être un .jpg, .jpeg ou .png uniquement";
+    }
+      
+    if (empty($errors)){
+        
+        $newFile = "./uploads/". time() .".".$fileExt;
+        if (@move_uploaded_file($tempFile,$newFile)) {
+            $success = true;
+        } else {
+            $errors[] ="Erreur lors de l'upload du fichier :(";  
+        }
     } 
 }
 
