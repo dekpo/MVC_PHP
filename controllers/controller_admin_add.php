@@ -5,7 +5,11 @@ $errors = [];
 $upload_max_filesize =  ini_get('upload_max_filesize');
 
 // Si le formulaire est validé on va tenter l'upload et on insert dans la table
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) && !empty($_POST['title'])) {
+    // On récup de title brut
+    $title = strip_tags($_POST['title']);
+    // On génère un nom de fichier sans espace (avec des tirets) sans accent en minuscules...
+    $slugName = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/','-',$title)));
     /*
     TRAITEMENT DU FICHIER POUR GERER L'UPLOAD
     */
@@ -29,7 +33,7 @@ if (isset($_POST['submit'])) {
     }
       
     if (empty($errors)){   
-        $newFile = "./uploads/". time() .".".$fileExt;
+        $newFile = "./uploads/". $slugName ."-". time() .".".$fileExt;
         if (@move_uploaded_file($tempFile,$newFile)) {
             $success = true;
         } else {
