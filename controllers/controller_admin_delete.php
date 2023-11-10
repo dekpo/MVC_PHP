@@ -10,7 +10,7 @@ if (isset($_GET['id'])){
     $sql = $db->prepare("SELECT src FROM picture WHERE id=?");
     $sql->execute([$id]);
     // Notez le fetchColumn() qui ne retourne qu'une seule info de la table
-    $srcToDelete = $sql->fetchColumn();
+    $srcToDelete = $sql->fetchColumn(); 
     // On fait la suppression de la ligne dans la table
     $sql = $db->prepare("DELETE FROM picture WHERE id=?");
     // Si la requète de suppression a bien été effectuée
