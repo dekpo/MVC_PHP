@@ -1,15 +1,19 @@
 <?php
-require_once("./services/database.php");
+require_once("./services/class/Database.php");
 
 class Picture
 {
-    public static function getAll()
+    private $db;
+
+    public function __construct(){
+        $this->db = new Database();
+    }
+
+    public function getAll($nb=null)
     {
+        $limit = !is_null($nb) ? "LIMIT " . $nb : "";
         $pictures = [];
-        $db = connectDB();
-        $sql = $db->prepare("SELECT * from picture ORDER BY id DESC");
-        $sql->execute();
-        $pictures = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $pictures = $this->db->query("SELECT * from picture ORDER BY id DESC ". $limit);
         return $pictures;
     }
 }
