@@ -17,11 +17,26 @@ class Picture
         return $pictures;
     }
 
-    public function getOne($id=null)
+    public function getOneById($id=null)
     {
         $whereId = !is_null($id) ? "WHERE id=?" : "";
         $picture = [];
         $picture = $this->db->select("SELECT * from picture ". $whereId. "LIMIT 1",[$id]);
         return $picture;
+    }
+
+    public function insert($data=[])
+    {
+        $addPic = $this->db->query("INSERT INTO picture (title, description, src, author) VALUES (?,?,?,?)",$data);
+        return $addPic;
+    }
+
+    public function delete($id=null)
+    {
+        if (!is_null($id)) {
+        $isDeleted = $this->db->query("DELETE FROM picture WHERE id=?",[$id]);
+        return true;
+        }
+        return false;
     }
 }

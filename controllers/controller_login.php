@@ -1,19 +1,20 @@
 <?php
-$error = "";
+require_once("./models/User.php");
+// on récupère l'id depuis l'url
+// on la convertit en entier pour être plus prudent...
+$errors = [];
 if (isset($_POST['submit'])){
     $email = strip_tags($_POST['email']);
-    $db = connectDB();
-    $sql = $db->prepare("SELECT * FROM user WHERE email=?");
-    $sql->execute([$email]);
-    $user = $sql->fetch(PDO::FETCH_ASSOC);
-    if ($sql->rowCount() == 0){
-        $error = "Vous n'avez pas de compte veuillez pour <a href=\"?page=register\">enregistrer</a> svp.";
+    $userDb = new User();
+    $user = $userDb->getOneByEmail($email);
+    if (!is_array($user)){
+        $errors[] = "Vous n'avez pas de compte veuillez pour <a href=\"?page=register\">enregistrer</a> svp.";
     }
-    $passVerif = password_verify(strip_tags($_POST['password']),$user['password']);
+    $passVerif = $user ? password_verify(strip_tags($_POST['password']),$user['password']) : true;
     if (!$passVerif){
-        $error = "Désolé Login/Mot-de-passe incorrect(s).";
+        $errors[] = "Désolé Login/Mot-de-passe incorrect(s).";
     }
-    if (empty($error)){
+    if (empty($errors)){
         $_SESSION['user'] = $user;
         header("Location:?page=admin_list");
     }

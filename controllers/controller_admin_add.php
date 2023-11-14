@@ -1,6 +1,7 @@
 <?php
 // Si $_SESSION['user'] n'est pas défini on redirige sur le login
 if (!isset($_SESSION['user'])) header("Location:?page=login");
+require_once("./models/Picture.php");
 $errors = [];
 $upload_max_filesize =  ini_get('upload_max_filesize');
 
@@ -45,16 +46,15 @@ if (isset($_POST['submit']) && !empty($_POST['title'])) {
     */
    
     if (empty($errors)) {
-        $db = connectDB();
-        $sql = $db->prepare("INSERT INTO picture (title, description, src, author) VALUES (?,?,?,?)");
-        $sql->execute([
+        $pic = new Picture();
+        $addPic = $pic->insert([
             $_POST['title'],
             $_POST['description'],
             $newFile,
             $_POST['author']
         ]);
-        // Et on redirige sur l'admin_list
-        header("Location:?page=admin_list");
+        // Et on redirige sur l'admin_list si la requète retourne le dernier id inséré !
+        if ($addPic->lastInsertId()) header("Location:?page=admin_list");
     }
 }
 

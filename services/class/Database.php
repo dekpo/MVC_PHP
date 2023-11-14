@@ -1,5 +1,7 @@
 <?php
 
+require_once "./config.php";
+
 class Database
 {
 
@@ -60,5 +62,11 @@ class Database
         $stmt->execute($params);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    public function query($statement,$params=[]){
+        $stmt = $this->getPDO()->prepare($statement);
+        $stmt->execute($params);
+        return $this->getPDO();
     }
 }
